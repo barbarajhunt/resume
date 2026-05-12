@@ -25,21 +25,35 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Check Pages configuration
+        id: pages
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh api "repos/${{ github.repository }}/pages" >/dev/null 2>&1; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::GitHub Pages is not enabled yet. A repository owner or admin must set Pages > Build and deployment > Source to GitHub Actions."
+          fi
+
       - name: Prepare static artifact
+        if: steps.pages.outputs.enabled == 'true'
         run: |
           mkdir -p _site
           cp -R index.html styles.css script.js images .nojekyll _site/
 
       - name: Configure Pages
+        if: steps.pages.outputs.enabled == 'true'
         uses: actions/configure-pages@v5
-        with:
-          enablement: true
 
       - name: Upload artifact
+        if: steps.pages.outputs.enabled == 'true'
         uses: actions/upload-pages-artifact@v3
         with:
           path: _site
 
       - name: Deploy
+        if: steps.pages.outputs.enabled == 'true'
         id: deployment
         uses: actions/deploy-pages@v4
