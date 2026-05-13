@@ -15,81 +15,81 @@ const prefersReducedMotion = window.matchMedia(
 const colorStops = [
   {
     p: 0,
-    a: [163, 138, 165],
-    b: [92, 110, 116],
-    c: [107, 138, 149],
-    d: [217, 151, 140],
-    e: [254, 113, 88],
-    f: [254, 87, 64],
+    a: [189, 110, 208],
+    b: [36, 121, 134],
+    c: [43, 168, 196],
+    d: [255, 155, 111],
+    e: [255, 79, 50],
+    f: [255, 45, 22],
     heading: [32, 48, 51],
   },
   {
     p: 0.34,
-    a: [136, 148, 178],
-    b: [89, 130, 136],
-    c: [189, 162, 144],
-    d: [243, 142, 138],
-    e: [255, 119, 78],
-    f: [254, 124, 127],
+    a: [116, 141, 232],
+    b: [22, 155, 170],
+    c: [228, 163, 100],
+    d: [255, 100, 116],
+    e: [255, 103, 41],
+    f: [255, 63, 118],
     heading: [34, 53, 58],
   },
   {
     p: 0.68,
-    a: [107, 138, 149],
-    b: [102, 126, 123],
-    c: [243, 142, 138],
-    d: [254, 113, 88],
-    e: [255, 157, 54],
-    f: [254, 87, 64],
+    a: [43, 168, 196],
+    b: [29, 154, 164],
+    c: [255, 100, 116],
+    d: [255, 79, 50],
+    e: [255, 173, 22],
+    f: [255, 45, 22],
     heading: [55, 38, 37],
   },
   {
     p: 1,
-    a: [163, 138, 165],
-    b: [92, 110, 116],
-    c: [255, 160, 148],
-    d: [254, 124, 127],
-    e: [255, 157, 54],
-    f: [254, 87, 64],
+    a: [189, 110, 208],
+    b: [36, 121, 134],
+    c: [255, 160, 181],
+    d: [255, 63, 118],
+    e: [255, 173, 22],
+    f: [255, 45, 22],
     heading: [61, 39, 39],
   },
 ];
 
 const blobMotion = {
   mauve: [
-    { p: 0, x: 0, y: 0, scale: 1, opacity: 0.58 },
-    { p: 0.5, x: -3, y: 8, scale: 1.16, opacity: 0.45 },
-    { p: 1, x: -10, y: 16, scale: 1.28, opacity: 0.32 },
+    { p: 0, x: 0, y: 0, scale: 1.04, opacity: 0.76 },
+    { p: 0.5, x: -9, y: 16, scale: 1.28, opacity: 0.58 },
+    { p: 1, x: -20, y: 28, scale: 1.48, opacity: 0.42 },
   ],
   slate: [
-    { p: 0, x: 0, y: 0, scale: 1, opacity: 0.7 },
-    { p: 0.42, x: 6, y: -8, scale: 1.12, opacity: 0.76 },
-    { p: 1, x: 12, y: -18, scale: 0.92, opacity: 0.42 },
+    { p: 0, x: 0, y: 0, scale: 1.08, opacity: 0.88 },
+    { p: 0.42, x: 14, y: -18, scale: 1.24, opacity: 0.92 },
+    { p: 1, x: 24, y: -32, scale: 1.02, opacity: 0.58 },
   ],
   blue: [
-    { p: 0, x: 0, y: 0, scale: 1, opacity: 0.62 },
-    { p: 0.46, x: 7, y: 8, scale: 1.18, opacity: 0.73 },
-    { p: 1, x: -4, y: -8, scale: 0.98, opacity: 0.35 },
+    { p: 0, x: 0, y: 0, scale: 1.08, opacity: 0.78 },
+    { p: 0.46, x: 16, y: 17, scale: 1.34, opacity: 0.9 },
+    { p: 1, x: -12, y: -18, scale: 1.08, opacity: 0.5 },
   ],
   salmon: [
-    { p: 0, x: -5, y: 8, scale: 0.82, opacity: 0.2 },
-    { p: 0.48, x: 8, y: -4, scale: 1.18, opacity: 0.66 },
-    { p: 1, x: 10, y: -18, scale: 1.34, opacity: 0.5 },
+    { p: 0, x: -12, y: 18, scale: 0.88, opacity: 0.3 },
+    { p: 0.48, x: 17, y: -12, scale: 1.36, opacity: 0.86 },
+    { p: 1, x: 20, y: -28, scale: 1.56, opacity: 0.72 },
   ],
   coral: [
-    { p: 0, x: -8, y: 18, scale: 0.78, opacity: 0.34 },
-    { p: 0.65, x: 5, y: -12, scale: 1.18, opacity: 0.72 },
-    { p: 1, x: 10, y: -22, scale: 1.3, opacity: 0.62 },
+    { p: 0, x: -16, y: 28, scale: 0.9, opacity: 0.5 },
+    { p: 0.65, x: 10, y: -22, scale: 1.42, opacity: 0.94 },
+    { p: 1, x: 22, y: -40, scale: 1.62, opacity: 0.86 },
   ],
   orange: [
-    { p: 0, x: 8, y: 18, scale: 0.7, opacity: 0.28 },
-    { p: 0.62, x: -6, y: -8, scale: 1.08, opacity: 0.66 },
-    { p: 1, x: -16, y: -26, scale: 1.26, opacity: 0.76 },
+    { p: 0, x: 16, y: 28, scale: 0.86, opacity: 0.42 },
+    { p: 0.62, x: -14, y: -18, scale: 1.28, opacity: 0.88 },
+    { p: 1, x: -32, y: -44, scale: 1.58, opacity: 0.96 },
   ],
   pink: [
-    { p: 0, x: 0, y: 18, scale: 0.78, opacity: 0.18 },
-    { p: 0.5, x: -4, y: -3, scale: 1.02, opacity: 0.45 },
-    { p: 1, x: -10, y: -18, scale: 1.18, opacity: 0.62 },
+    { p: 0, x: 0, y: 24, scale: 0.9, opacity: 0.28 },
+    { p: 0.5, x: -10, y: -9, scale: 1.18, opacity: 0.7 },
+    { p: 1, x: -22, y: -34, scale: 1.42, opacity: 0.88 },
   ],
 };
 
@@ -228,7 +228,7 @@ const animateAtmosphere = () => {
   if (prefersReducedMotion) {
     fluidProgress = targetProgress;
   } else {
-    fluidProgress += (targetProgress - fluidProgress) * 0.06;
+    fluidProgress += (targetProgress - fluidProgress) * 0.12;
 
     if (Math.abs(targetProgress - fluidProgress) < 0.0004) {
       fluidProgress = targetProgress;
