@@ -21,7 +21,7 @@ const colorStops = [
     d: [254, 113, 88],
     e: [255, 119, 78],
     f: [255, 157, 54],
-    heading: [32, 48, 51],
+    heading: [21, 37, 41],
   },
   {
     p: 0.28,
@@ -31,7 +31,7 @@ const colorStops = [
     d: [254, 113, 88],
     e: [255, 119, 78],
     f: [255, 157, 54],
-    heading: [34, 53, 58],
+    heading: [21, 39, 44],
   },
   {
     p: 0.55,
@@ -41,7 +41,7 @@ const colorStops = [
     d: [255, 91, 48],
     e: [255, 157, 54],
     f: [255, 55, 34],
-    heading: [55, 38, 37],
+    heading: [46, 30, 30],
   },
   {
     p: 0.78,
@@ -51,7 +51,7 @@ const colorStops = [
     d: [254, 113, 88],
     e: [255, 119, 78],
     f: [255, 55, 34],
-    heading: [58, 40, 36],
+    heading: [48, 31, 29],
   },
   {
     p: 1,
@@ -61,7 +61,7 @@ const colorStops = [
     d: [254, 113, 88],
     e: [255, 157, 54],
     f: [255, 63, 44],
-    heading: [61, 39, 39],
+    heading: [49, 31, 31],
   },
 ];
 
@@ -180,16 +180,16 @@ const setBlobState = (progress, elapsed = 0, energy = 0) => {
     const phase = index * 1.18;
     const driftX =
       Math.sin(elapsed * 0.00038 + phase + progress * 5.4) *
-        (2.8 + index * 0.24) +
-      energy * (index % 2 === 0 ? 4.5 : -3.6);
+        (5.8 + index * 0.45) +
+      energy * (index % 2 === 0 ? 6.5 : -5.2);
     const driftY =
       Math.cos(elapsed * 0.00032 + phase * 1.3 + progress * 4.8) *
-        (2.2 + index * 0.2) -
-      energy * (index % 3 === 0 ? 3.2 : 1.6);
+        (4.8 + index * 0.35) -
+      energy * (index % 3 === 0 ? 4.8 : 2.8);
     const driftScale =
       1 +
-      Math.sin(elapsed * 0.00042 + phase + progress * 3.2) * 0.045 +
-      energy * 0.075;
+      Math.sin(elapsed * 0.00042 + phase + progress * 3.2) * 0.075 +
+      energy * 0.1;
     const driftOpacity =
       Math.cos(elapsed * 0.00034 + phase) * 0.025 + energy * 0.045;
 
@@ -260,10 +260,10 @@ const applyAtmosphere = (progress, elapsed = 0, energy = 0) => {
   const waveA = Math.sin(elapsed * 0.00034 + progress * 5.2);
   const waveB = Math.cos(elapsed * 0.00027 + progress * 3.7);
   const waveC = Math.sin(elapsed * 0.00019 + progress * 7.1);
-  const ambientX = waveA * 4.2 + waveB * 1.4 + surge * 3.8;
-  const ambientY = waveB * 3.2 + waveC * 1.6 - surge * 3.2;
-  const sectionFlowX = waveB * 3.6 + surge * 2.8;
-  const sectionFlowY = waveA * 2.8 - surge * 2.2;
+  const ambientX = waveA * 8.2 + waveB * 3.2 + surge * 5.8;
+  const ambientY = waveB * 6 + waveC * 2.6 - surge * 4.8;
+  const sectionFlowX = waveB * 7.4 + surge * 4.2;
+  const sectionFlowY = waveA * 5.6 - surge * 3.6;
   const baseScale = lerp(1.14, 1.31, warmth);
   const ambientScale = 1 + waveA * 0.018 + surge * 0.035;
 
@@ -320,11 +320,15 @@ const applyAtmosphere = (progress, elapsed = 0, energy = 0) => {
   );
   root.style.setProperty(
     "--current-x",
-    `${lerp(-5, 7, motionProgress).toFixed(2)}vw`,
+    `${(lerp(-5, 7, motionProgress) + waveA * 4.6 + surge * 3.2).toFixed(
+      2,
+    )}vw`,
   );
   root.style.setProperty(
     "--current-y",
-    `${lerp(3, -8, motionProgress).toFixed(2)}vh`,
+    `${(lerp(3, -8, motionProgress) + waveB * 4.2 - surge * 3.4).toFixed(
+      2,
+    )}vh`,
   );
   root.style.setProperty(
     "--current-scale",
