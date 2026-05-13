@@ -1,22 +1,42 @@
 :root {
-  --lavender: #a28fac;
-  --teal: #557e7a;
+  --mauve: #a38aa5;
+  --slate-teal: #5c6e74;
+  --top-teal: #667e7b;
+  --blue-teal: #6b8a95;
+  --periwinkle: #8894b2;
+  --aquatic-teal: #598288;
+  --salmon: #f38e8a;
+  --peach-rose: #d9978c;
+  --tan: #bda290;
+  --coral: #fe7158;
+  --warm-coral: #ff774e;
+  --orange: #ff9d36;
+  --soft-pink: #ffa094;
+  --coral-pink: #fe7c7f;
+  --red-orange: #fe5740;
+  --lavender: var(--mauve);
+  --teal: var(--top-teal);
   --water: #609090;
-  --mist: #b499a6;
-  --peach: #ff8f5b;
-  --coral: #fd745c;
-  --amber: #fea040;
-  --rose: #fe6677;
+  --mist: var(--tan);
+  --peach: var(--peach-rose);
+  --amber: var(--orange);
+  --rose: var(--coral-pink);
   --ink: #203033;
   --ink-soft: #405458;
+  --ink-warm: #3d2727;
   --paper: #fff8f2;
   --paper-soft: rgba(255, 248, 242, 0.78);
   --line: rgba(32, 48, 51, 0.18);
-  --tone-a: rgb(162, 143, 172);
-  --tone-b: rgb(85, 126, 122);
-  --tone-c: rgb(255, 143, 91);
-  --tone-d: rgb(254, 102, 119);
+  --tone-a: #a38aa5;
+  --tone-b: #667e7b;
+  --tone-c: #d9978c;
+  --tone-d: #fe7158;
+  --tone-e: #ff9d36;
+  --tone-f: #fe5740;
+  --heading-tone: #203033;
   --scroll: 0;
+  --flow: 0;
+  --warmth: 0;
   --header-h: 72px;
   color-scheme: light;
 }
@@ -60,53 +80,252 @@ img {
   z-index: -2;
   overflow: hidden;
   background:
-    linear-gradient(145deg, var(--tone-a), transparent 42%),
-    linear-gradient(30deg, var(--tone-c), var(--tone-d) 52%, var(--tone-b));
-  transition: background 220ms linear;
+    radial-gradient(
+      circle at 20% 10%,
+      color-mix(in srgb, var(--tone-a) 78%, transparent) 0%,
+      transparent 38%
+    ),
+    radial-gradient(
+      circle at 76% 16%,
+      color-mix(in srgb, var(--tone-b) 78%, transparent) 0%,
+      transparent 42%
+    ),
+    radial-gradient(
+      circle at 55% 36%,
+      color-mix(in srgb, var(--blue-teal) 58%, transparent) 0%,
+      transparent 48%
+    ),
+    linear-gradient(
+      180deg,
+      var(--periwinkle) 0%,
+      var(--peach-rose) 48%,
+      var(--coral) 100%
+    );
+  transition: background 900ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.color-field__image,
-.color-field__wash,
+.color-field__base,
+.color-field__veil,
 .color-field__grain {
   position: absolute;
   inset: 0;
 }
 
-.color-field__image {
-  background-image: url("images/IMG_1026.PNG");
-  background-size: cover;
-  background-position: center;
-  opacity: 0.74;
-  transform: translate3d(0, calc(var(--scroll) * -42px), 0) scale(1.08);
-  filter: saturate(1.06) contrast(0.96);
+.color-field__base {
+  inset: -10%;
+  background:
+    radial-gradient(
+      circle at 18% 12%,
+      color-mix(in srgb, var(--mauve) 86%, transparent) 0%,
+      transparent 36%
+    ),
+    radial-gradient(
+      circle at 74% 15%,
+      color-mix(in srgb, var(--slate-teal) 82%, transparent) 0%,
+      transparent 42%
+    ),
+    radial-gradient(
+      circle at 34% 35%,
+      color-mix(in srgb, var(--periwinkle) 72%, transparent) 0%,
+      transparent 44%
+    ),
+    radial-gradient(
+      circle at 61% 38%,
+      color-mix(in srgb, var(--blue-teal) 72%, transparent) 0%,
+      transparent 43%
+    ),
+    radial-gradient(
+      circle at 20% 56%,
+      color-mix(in srgb, var(--salmon) 70%, transparent) 0%,
+      transparent 42%
+    ),
+    radial-gradient(
+      circle at 58% 54%,
+      color-mix(in srgb, var(--peach-rose) 68%, transparent) 0%,
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 82% 70%,
+      color-mix(in srgb, var(--orange) 86%, transparent) 0%,
+      transparent 48%
+    ),
+    radial-gradient(
+      circle at 45% 88%,
+      color-mix(in srgb, var(--coral-pink) 78%, transparent) 0%,
+      transparent 42%
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--periwinkle) 88%, var(--paper)) 0%,
+      color-mix(in srgb, var(--tan) 54%, var(--peach-rose)) 46%,
+      var(--warm-coral) 100%
+    );
+  opacity: 0.78;
+  filter: blur(12px) saturate(1.05);
+  transform: translate3d(0, 0, 0) scale(1.08);
 }
 
-.color-field__wash {
+.color-field__blob {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.66;
+  filter: blur(82px);
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+  transform: translate3d(0, 0, 0) scale(1);
+  transform-origin: center;
+  will-change: transform, opacity;
+}
+
+.color-field__blob::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--blob-fill);
+  animation: atmospheric-pulse 18s cubic-bezier(0.22, 1, 0.36, 1) infinite
+    alternate;
+}
+
+.color-field__blob--mauve {
+  top: -24vmax;
+  left: -24vmax;
+  width: 72vmax;
+  height: 72vmax;
+  --blob-fill: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--mauve) 90%, white) 0%,
+    color-mix(in srgb, var(--mauve) 60%, transparent) 42%,
+    transparent 72%
+  );
+}
+
+.color-field__blob--slate {
+  top: -20vmax;
+  right: -22vmax;
+  width: 80vmax;
+  height: 80vmax;
+  --blob-fill: radial-gradient(
+    circle,
+    var(--slate-teal) 0%,
+    color-mix(in srgb, var(--blue-teal) 54%, transparent) 46%,
+    transparent 74%
+  );
+}
+
+.color-field__blob--blue {
+  top: 8vh;
+  left: 12vw;
+  width: 78vmax;
+  height: 58vmax;
+  --blob-fill: radial-gradient(
+    ellipse,
+    color-mix(in srgb, var(--periwinkle) 74%, var(--blue-teal)) 0%,
+    color-mix(in srgb, var(--aquatic-teal) 46%, transparent) 52%,
+    transparent 76%
+  );
+}
+
+.color-field__blob--salmon {
+  top: 28vh;
+  left: -18vmax;
+  width: 72vmax;
+  height: 64vmax;
+  --blob-fill: radial-gradient(
+    circle,
+    var(--salmon) 0%,
+    color-mix(in srgb, var(--peach-rose) 62%, transparent) 48%,
+    transparent 76%
+  );
+}
+
+.color-field__blob--coral {
+  bottom: -20vmax;
+  left: -12vmax;
+  width: 86vmax;
+  height: 72vmax;
+  --blob-fill: radial-gradient(
+    circle,
+    var(--coral) 0%,
+    color-mix(in srgb, var(--warm-coral) 62%, transparent) 48%,
+    transparent 78%
+  );
+}
+
+.color-field__blob--orange {
+  right: -22vmax;
+  bottom: -16vmax;
+  width: 86vmax;
+  height: 86vmax;
+  --blob-fill: radial-gradient(
+    circle,
+    var(--orange) 0%,
+    color-mix(in srgb, var(--red-orange) 54%, transparent) 48%,
+    transparent 76%
+  );
+}
+
+.color-field__blob--pink {
+  right: 8vw;
+  bottom: -28vmax;
+  width: 72vmax;
+  height: 66vmax;
+  --blob-fill: radial-gradient(
+    ellipse,
+    var(--soft-pink) 0%,
+    color-mix(in srgb, var(--coral-pink) 54%, transparent) 48%,
+    transparent 78%
+  );
+}
+
+.color-field__veil {
   background:
     linear-gradient(
       180deg,
-      rgba(255, 248, 242, 0.34),
-      rgba(255, 248, 242, 0.9)
+      rgba(255, 248, 242, 0.28) 0%,
+      rgba(255, 248, 242, 0.56) 50%,
+      rgba(255, 248, 242, 0.72) 100%
     ),
-    linear-gradient(
-      115deg,
-      color-mix(in srgb, var(--tone-b) 58%, transparent),
-      transparent 45%
+    radial-gradient(
+      circle at 80% 28%,
+      color-mix(in srgb, var(--slate-teal) 16%, transparent),
+      transparent 46%
     ),
-    linear-gradient(
-      290deg,
-      color-mix(in srgb, var(--tone-d) 42%, transparent),
-      transparent 48%
+    radial-gradient(
+      circle at 24% 78%,
+      color-mix(in srgb, var(--soft-pink) 18%, transparent),
+      transparent 44%
     );
   opacity: 0.92;
 }
 
+@keyframes atmospheric-pulse {
+  0% {
+    transform: scale(0.98) rotate(0deg);
+    filter: saturate(0.96);
+  }
+
+  100% {
+    transform: scale(1.08) rotate(4deg);
+    filter: saturate(1.08);
+  }
+}
+
 .color-field__grain {
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-  background-size: 38px 38px;
-  opacity: 0.2;
+    radial-gradient(circle, rgba(32, 48, 51, 0.14) 0.7px, transparent 0.8px),
+    radial-gradient(circle, rgba(255, 255, 255, 0.24) 0.8px, transparent 0.9px),
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-position:
+    0 0,
+    17px 23px,
+    0 0;
+  background-size:
+    24px 24px,
+    31px 31px,
+    42px 42px;
+  opacity: 0.11;
+  mix-blend-mode: overlay;
   mask-image: linear-gradient(
     180deg,
     transparent,
@@ -213,6 +432,7 @@ img {
 
 .section-band {
   position: relative;
+  isolation: isolate;
   padding: 96px max(24px, calc((100vw - 1180px) / 2));
 }
 
@@ -238,15 +458,26 @@ img {
   inset: 0;
   z-index: -1;
   background:
-    linear-gradient(
-      90deg,
-      rgba(255, 248, 242, 0.9),
-      rgba(255, 248, 242, 0.54) 52%,
-      transparent
+    radial-gradient(
+      circle at 18% 20%,
+      rgba(255, 248, 242, 0.94),
+      rgba(255, 248, 242, 0.5) 42%,
+      transparent 70%
     ),
-    url("images/IMG_1026.PNG") center / cover;
-  opacity: 0.9;
-  transform: scale(1.03);
+    radial-gradient(
+      circle at 78% 18%,
+      color-mix(in srgb, var(--slate-teal) 20%, transparent),
+      transparent 48%
+    ),
+    linear-gradient(
+      105deg,
+      rgba(255, 248, 242, 0.86),
+      rgba(255, 248, 242, 0.42) 54%,
+      transparent 88%
+    ),
+    linear-gradient(180deg, transparent, rgba(255, 248, 242, 0.46));
+  opacity: 0.96;
+  transform: scale(1.01);
 }
 
 .hero::after {
@@ -287,8 +518,10 @@ img {
 .credentials-copy h2,
 .contact-copy h2 {
   margin: 0;
+  color: var(--heading-tone);
   font-weight: 400;
   line-height: 1.04;
+  transition: color 700ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .hero h1 {
@@ -405,11 +638,17 @@ img {
 }
 
 .intro-band {
-  background: linear-gradient(
-    180deg,
-    rgba(255, 248, 242, 0.9),
-    rgba(255, 248, 242, 0.64)
-  );
+  background:
+    radial-gradient(
+      circle at 78% 8%,
+      color-mix(in srgb, var(--tone-b) 18%, transparent),
+      transparent 44%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(255, 248, 242, 0.78),
+      rgba(255, 248, 242, 0.42)
+    );
 }
 
 .section-heading {
@@ -451,14 +690,19 @@ img {
   border: 1px solid rgba(32, 48, 51, 0.12);
   border-radius: 8px;
   background:
+    radial-gradient(
+      circle at 86% 14%,
+      color-mix(in srgb, var(--tone-b) 10%, transparent),
+      transparent 42%
+    ),
     linear-gradient(
       180deg,
-      rgba(255, 255, 255, 0.58),
-      rgba(255, 255, 255, 0.18)
+      rgba(255, 255, 255, 0.64),
+      rgba(255, 255, 255, 0.2)
     ),
-    rgba(255, 248, 242, 0.66);
+    color-mix(in srgb, var(--tone-a) 8%, rgba(255, 248, 242, 0.62));
   box-shadow: 0 20px 70px rgba(85, 126, 122, 0.12);
-  backdrop-filter: blur(18px);
+  backdrop-filter: blur(22px) saturate(1.12);
   transition:
     transform 220ms ease,
     border-color 220ms ease,
@@ -511,12 +755,12 @@ img {
   background:
     linear-gradient(
       180deg,
-      rgba(243, 250, 247, 0.62),
-      rgba(255, 241, 229, 0.72)
+      rgba(243, 250, 247, 0.5),
+      rgba(255, 241, 229, 0.46)
     ),
     linear-gradient(
       120deg,
-      color-mix(in srgb, var(--tone-b) 18%, transparent),
+      color-mix(in srgb, var(--tone-c) 18%, transparent),
       transparent
     );
 }
@@ -562,12 +806,21 @@ img {
   border: 1px solid rgba(32, 48, 51, 0.14);
   border-radius: 8px;
   background:
+    radial-gradient(
+      circle at 12% 8%,
+      color-mix(in srgb, var(--tone-a) 28%, transparent),
+      transparent 48%
+    ),
+    radial-gradient(
+      circle at 86% 76%,
+      color-mix(in srgb, var(--tone-e) 34%, transparent),
+      transparent 52%
+    ),
     linear-gradient(
       135deg,
       rgba(255, 248, 242, 0.72),
       rgba(255, 255, 255, 0.22)
-    ),
-    url("images/IMG_1026.PNG") center / cover;
+    );
   box-shadow: 0 24px 80px rgba(32, 48, 51, 0.14);
 }
 
@@ -599,11 +852,13 @@ img {
 }
 
 .experience-band {
-  background: linear-gradient(
-    180deg,
-    rgba(255, 241, 229, 0.72),
-    rgba(242, 232, 243, 0.72)
-  );
+  background:
+    radial-gradient(
+      circle at 18% 20%,
+      color-mix(in srgb, var(--tone-d) 18%, transparent),
+      transparent 46%
+    ),
+    linear-gradient(180deg, rgba(255, 241, 229, 0.5), rgba(242, 232, 243, 0.44));
 }
 
 .timeline {
@@ -665,8 +920,14 @@ img {
   padding: 22px;
   border: 1px solid rgba(32, 48, 51, 0.12);
   border-radius: 8px;
-  background: rgba(255, 248, 242, 0.64);
-  backdrop-filter: blur(16px);
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.52),
+      rgba(255, 255, 255, 0.16)
+    ),
+    color-mix(in srgb, var(--tone-c) 10%, rgba(255, 248, 242, 0.62));
+  backdrop-filter: blur(20px) saturate(1.1);
 }
 
 .timeline-item__meta {
@@ -689,12 +950,12 @@ img {
   background:
     linear-gradient(
       180deg,
-      rgba(242, 232, 243, 0.72),
-      rgba(238, 248, 245, 0.72)
+      rgba(242, 232, 243, 0.48),
+      rgba(238, 248, 245, 0.42)
     ),
     linear-gradient(
       120deg,
-      color-mix(in srgb, var(--tone-d) 16%, transparent),
+      color-mix(in srgb, var(--tone-e) 18%, transparent),
       transparent
     );
 }
@@ -718,11 +979,13 @@ img {
 }
 
 .leadership-band {
-  background: linear-gradient(
-    180deg,
-    rgba(238, 248, 245, 0.72),
-    rgba(255, 246, 236, 0.76)
-  );
+  background:
+    radial-gradient(
+      circle at 82% 28%,
+      color-mix(in srgb, var(--tone-b) 14%, transparent),
+      transparent 42%
+    ),
+    linear-gradient(180deg, rgba(238, 248, 245, 0.42), rgba(255, 246, 236, 0.5));
 }
 
 .split-grid {
@@ -730,11 +993,17 @@ img {
 }
 
 .credentials-band {
-  background: linear-gradient(
-    180deg,
-    rgba(255, 246, 236, 0.76),
-    rgba(248, 236, 240, 0.76)
-  );
+  background:
+    radial-gradient(
+      circle at 12% 72%,
+      color-mix(in srgb, var(--tone-f) 12%, transparent),
+      transparent 44%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(255, 246, 236, 0.48),
+      rgba(248, 236, 240, 0.48)
+    );
 }
 
 .credential-lists {
@@ -761,12 +1030,12 @@ img {
   background:
     linear-gradient(
       180deg,
-      rgba(248, 236, 240, 0.76),
-      rgba(255, 248, 242, 0.88)
+      rgba(248, 236, 240, 0.48),
+      rgba(255, 248, 242, 0.76)
     ),
     linear-gradient(
       140deg,
-      color-mix(in srgb, var(--tone-a) 16%, transparent),
+      color-mix(in srgb, var(--tone-d) 14%, transparent),
       transparent
     );
 }
@@ -954,7 +1223,7 @@ img {
     transform: none;
   }
 
-  .color-field__image,
+  .color-field__blob,
   .image-band__media img {
     transform: none;
   }
