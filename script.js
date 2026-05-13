@@ -262,8 +262,6 @@ const applyAtmosphere = (progress, elapsed = 0, energy = 0) => {
   const waveC = Math.sin(elapsed * 0.00019 + progress * 7.1);
   const ambientX = waveA * 4.2 + waveB * 1.4 + surge * 3.8;
   const ambientY = waveB * 3.2 + waveC * 1.6 - surge * 3.2;
-  const sectionFlowX = waveB * 3.6 + surge * 2.8;
-  const sectionFlowY = waveA * 2.8 - surge * 2.2;
   const baseScale = lerp(1.14, 1.31, warmth);
   const ambientScale = 1 + waveA * 0.018 + surge * 0.035;
 
@@ -288,8 +286,6 @@ const applyAtmosphere = (progress, elapsed = 0, energy = 0) => {
     `${(waveC * 1.5 + surge * 1.2).toFixed(2)}deg`,
   );
   root.style.setProperty("--ambient-scale", ambientScale.toFixed(3));
-  root.style.setProperty("--section-flow-x", `${sectionFlowX.toFixed(2)}vw`);
-  root.style.setProperty("--section-flow-y", `${sectionFlowY.toFixed(2)}vh`);
   root.style.setProperty(
     "--warm-glow-opacity",
     (0.34 + warmth * 0.34 + surge * 0.08).toFixed(3),
