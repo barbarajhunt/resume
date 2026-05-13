@@ -1,19 +1,19 @@
 :root {
-  --mauve: #c957e0;
-  --slate-teal: #138e99;
-  --top-teal: #16a8b4;
-  --blue-teal: #36bed8;
-  --periwinkle: #6e84f4;
-  --aquatic-teal: #0fb6c0;
-  --salmon: #ff6578;
-  --peach-rose: #ff8e68;
-  --tan: #f0a257;
-  --coral: #fe7158;
-  --warm-coral: #ff774e;
-  --orange: #ff9d36;
-  --soft-pink: #ffa0bc;
-  --coral-pink: #ff3d79;
-  --red-orange: #ff3722;
+  --mauve: #b96bc6;
+  --slate-teal: #23848d;
+  --top-teal: #269ba5;
+  --blue-teal: #58b2c5;
+  --periwinkle: #7f8fe0;
+  --aquatic-teal: #31a5ad;
+  --salmon: #f27680;
+  --peach-rose: #f89a77;
+  --tan: #e2a167;
+  --coral: #f3745f;
+  --warm-coral: #f47d58;
+  --orange: #f39d42;
+  --soft-pink: #f4a3b9;
+  --coral-pink: #ee5680;
+  --red-orange: #ef5642;
   --lavender: var(--mauve);
   --teal: var(--top-teal);
   --water: #609090;
@@ -21,18 +21,18 @@
   --peach: var(--peach-rose);
   --amber: var(--orange);
   --rose: var(--coral-pink);
-  --ink: #17282c;
-  --ink-soft: #273f44;
+  --ink: #203033;
+  --ink-soft: #405458;
   --ink-warm: #3d2727;
   --paper: #fff8f2;
   --paper-soft: rgba(255, 248, 242, 0.52);
   --line: rgba(32, 48, 51, 0.18);
-  --tone-a: #c957e0;
-  --tone-b: #16a8b4;
-  --tone-c: #ff8e68;
-  --tone-d: #fe7158;
-  --tone-e: #ff774e;
-  --tone-f: #ff9d36;
+  --tone-a: #b96bc6;
+  --tone-b: #269ba5;
+  --tone-c: #f89a77;
+  --tone-d: #f3745f;
+  --tone-e: #f47d58;
+  --tone-f: #f39d42;
   --heading-tone: #203033;
   --scroll: 0;
   --flow: 0;
@@ -58,7 +58,6 @@
   --surge: 0;
   --surge-opacity: 0.34;
   --surge-scale: 1.08;
-  --section-mist-opacity: 0.62;
   --header-h: 72px;
   color-scheme: light;
 }
@@ -141,7 +140,7 @@ img {
       var(--warm-coral) 84%,
       var(--orange) 100%
     );
-  filter: saturate(1.5) contrast(1.1);
+  filter: saturate(1.26) contrast(1.06);
   transition: background 900ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -168,7 +167,7 @@ img {
       transparent 42%
     );
   opacity: var(--warm-glow-opacity);
-  filter: blur(42px) saturate(1.75) contrast(1.08);
+  filter: blur(46px) saturate(1.35) contrast(1.04);
   transform: translate3d(var(--current-x), var(--current-y), 0)
     scale(var(--current-scale));
   will-change: transform, opacity;
@@ -252,7 +251,7 @@ img {
       var(--orange) 100%
     );
   opacity: 1;
-  filter: blur(5px) saturate(1.78) contrast(1.16);
+  filter: blur(6px) saturate(1.34) contrast(1.08);
   transform: translate3d(
       calc(var(--base-x) + var(--ambient-x)),
       calc(var(--base-y) + var(--ambient-y)),
@@ -284,7 +283,7 @@ img {
       transparent 52%
     );
   opacity: var(--surge-opacity);
-  filter: blur(38px) saturate(1.45);
+  filter: blur(42px) saturate(1.18);
   transform: translate3d(var(--ambient-inverse-x), var(--ambient-counter-y), 0)
     scale(var(--surge-scale));
   will-change: transform, opacity;
@@ -294,8 +293,8 @@ img {
   position: absolute;
   border-radius: 50%;
   z-index: 2;
-  opacity: 0.94;
-  filter: blur(54px) saturate(2.1) contrast(1.1);
+  opacity: 0.84;
+  filter: blur(62px) saturate(1.42) contrast(1.05);
   mix-blend-mode: normal;
   pointer-events: none;
   transform: translate3d(0, 0, 0) scale(1);
@@ -430,13 +429,13 @@ img {
 
 @keyframes atmospheric-pulse {
   0% {
-    transform: scale(0.92) rotate(-4deg);
-    filter: saturate(1.12);
+    transform: scale(0.94) rotate(-3deg);
+    filter: saturate(1.02);
   }
 
   100% {
-    transform: scale(1.34) rotate(12deg);
-    filter: saturate(1.55);
+    transform: scale(1.22) rotate(9deg);
+    filter: saturate(1.18);
   }
 }
 
@@ -592,43 +591,24 @@ img {
 .section-band::before {
   content: "";
   position: absolute;
-  inset: -160px 0;
+  inset: -120px 0;
   z-index: 0;
   pointer-events: none;
-  background:
-    radial-gradient(
-      ellipse at 18% 34%,
-      rgba(255, 248, 242, 0.58) 0%,
-      rgba(255, 248, 242, 0.34) 34%,
-      transparent 62%
-    ),
-    radial-gradient(
-      ellipse at 76% 72%,
-      rgba(255, 248, 242, 0.34) 0%,
-      rgba(255, 248, 242, 0.18) 42%,
-      transparent 68%
-    ),
-    linear-gradient(
-      90deg,
-      rgba(255, 248, 242, 0.56),
-      rgba(255, 248, 242, 0.28) 52%,
-      rgba(255, 248, 242, 0.18)
-    );
-  opacity: var(--section-mist-opacity);
-  filter: blur(0.5px) saturate(0.92) brightness(1.04);
-  backdrop-filter: blur(10px) saturate(0.88) brightness(1.05);
+  background: var(--section-glaze, transparent);
+  opacity: var(--section-glaze-opacity, 1);
+  filter: blur(0.5px) saturate(1.12);
   mask-image: linear-gradient(
     180deg,
     transparent 0%,
-    black 12%,
-    black 88%,
+    black 18%,
+    black 82%,
     transparent 100%
   );
   -webkit-mask-image: linear-gradient(
     180deg,
     transparent 0%,
-    black 12%,
-    black 88%,
+    black 18%,
+    black 82%,
     transparent 100%
   );
   transform-origin: center;
@@ -722,47 +702,7 @@ img {
 }
 
 .hero__content {
-  position: relative;
-  isolation: isolate;
   max-width: 780px;
-}
-
-.hero__content::before,
-.section-heading::before,
-.current-copy::before,
-.image-band__copy::before,
-.credentials-copy::before,
-.contact-copy::before {
-  content: "";
-  position: absolute;
-  inset: -18px -22px;
-  z-index: -1;
-  border-radius: 8px;
-  background:
-    radial-gradient(
-      ellipse at 18% 22%,
-      rgba(255, 255, 255, 0.5),
-      transparent 58%
-    ),
-    linear-gradient(
-      135deg,
-      rgba(255, 248, 242, 0.7),
-      rgba(255, 248, 242, 0.3) 58%,
-      rgba(255, 248, 242, 0.16)
-    );
-  backdrop-filter: blur(16px) saturate(0.9);
-  mask-image: radial-gradient(
-    ellipse at center,
-    black 0%,
-    black 62%,
-    transparent 100%
-  );
-  -webkit-mask-image: radial-gradient(
-    ellipse at center,
-    black 0%,
-    black 62%,
-    transparent 100%
-  );
 }
 
 .eyebrow,
@@ -791,7 +731,6 @@ img {
   color: var(--heading-tone);
   font-weight: 400;
   line-height: 1.04;
-  text-shadow: 0 2px 28px rgba(255, 248, 242, 0.78);
   transition: color 700ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -810,7 +749,7 @@ img {
 .hero__summary {
   max-width: 720px;
   margin: 22px 0 0;
-  color: var(--ink);
+  color: var(--ink-soft);
   font-size: 1.08rem;
 }
 
@@ -899,9 +838,8 @@ img {
 .tag-list li {
   border: 1px solid rgba(32, 48, 51, 0.14);
   border-radius: 8px;
-  background: rgba(255, 248, 242, 0.62);
+  background: rgba(255, 248, 242, 0.42);
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.28);
-  backdrop-filter: blur(14px) saturate(0.94);
 }
 
 .hero__notes span {
@@ -910,22 +848,27 @@ img {
 }
 
 .intro-band {
-  --section-mist-opacity: 0.64;
+  --section-glaze:
+    radial-gradient(
+      ellipse at 22% 78%,
+      color-mix(in srgb, var(--tone-d) 24%, transparent),
+      transparent 48%
+    ),
+    radial-gradient(
+      circle at 78% 8%,
+      color-mix(in srgb, var(--tone-b) 22%, transparent),
+      transparent 44%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(255, 248, 242, 0.34),
+      rgba(255, 248, 242, 0.08)
+    );
 }
 
 .section-heading {
-  position: relative;
-  isolation: isolate;
   max-width: 790px;
   margin-bottom: 36px;
-}
-
-.current-copy,
-.image-band__copy,
-.credentials-copy,
-.contact-copy {
-  position: relative;
-  isolation: isolate;
 }
 
 .section-heading h2,
@@ -942,9 +885,8 @@ img {
 .credentials-copy p,
 .contact-copy p {
   margin: 18px 0 0;
-  color: var(--ink);
+  color: var(--ink-soft);
   font-size: 1.05rem;
-  text-shadow: 0 1px 18px rgba(255, 248, 242, 0.72);
 }
 
 .practice-grid,
@@ -970,12 +912,12 @@ img {
     ),
     linear-gradient(
       180deg,
-      rgba(255, 255, 255, 0.5),
-      rgba(255, 255, 255, 0.16)
+      rgba(255, 255, 255, 0.34),
+      rgba(255, 255, 255, 0.06)
     ),
-    color-mix(in srgb, var(--tone-d) 8%, rgba(255, 248, 242, 0.64));
+    color-mix(in srgb, var(--tone-d) 12%, rgba(255, 248, 242, 0.38));
   box-shadow: 0 20px 70px rgba(85, 126, 122, 0.12);
-  backdrop-filter: blur(24px) saturate(0.96);
+  backdrop-filter: blur(22px) saturate(1.12);
   transition:
     transform 220ms ease,
     border-color 220ms ease,
@@ -1021,11 +963,26 @@ img {
 .list-card p,
 .timeline-item p {
   margin: 14px 0 0;
-  color: var(--ink);
+  color: var(--ink-soft);
 }
 
 .current-band {
-  --section-mist-opacity: 0.62;
+  --section-glaze:
+    radial-gradient(
+      ellipse at 74% 74%,
+      color-mix(in srgb, var(--tone-e) 26%, transparent),
+      transparent 52%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(243, 250, 247, 0.18),
+      rgba(255, 241, 229, 0.08)
+    ),
+    linear-gradient(
+      120deg,
+      color-mix(in srgb, var(--tone-d) 24%, transparent),
+      transparent
+    );
 }
 
 .current-layout,
@@ -1081,8 +1038,8 @@ img {
     ),
     linear-gradient(
       135deg,
-      rgba(255, 248, 242, 0.76),
-      rgba(255, 255, 255, 0.28)
+      rgba(255, 248, 242, 0.58),
+      rgba(255, 255, 255, 0.12)
     );
   box-shadow: 0 24px 80px rgba(32, 48, 51, 0.14);
 }
@@ -1090,8 +1047,7 @@ img {
 .metric-panel div {
   padding: 22px;
   border-radius: 8px;
-  background: rgba(255, 248, 242, 0.72);
-  backdrop-filter: blur(14px) saturate(0.94);
+  background: rgba(255, 248, 242, 0.58);
 }
 
 .metric-panel__number {
@@ -1116,7 +1072,18 @@ img {
 }
 
 .experience-band {
-  --section-mist-opacity: 0.64;
+  --section-glaze:
+    radial-gradient(
+      circle at 18% 20%,
+      color-mix(in srgb, var(--tone-d) 34%, transparent),
+      transparent 46%
+    ),
+    radial-gradient(
+      ellipse at 78% 76%,
+      color-mix(in srgb, var(--tone-e) 28%, transparent),
+      transparent 52%
+    ),
+    linear-gradient(180deg, rgba(255, 241, 229, 0.12), rgba(242, 232, 243, 0.1));
 }
 
 .timeline {
@@ -1181,11 +1148,11 @@ img {
   background:
     linear-gradient(
       135deg,
-      rgba(255, 255, 255, 0.48),
-      rgba(255, 255, 255, 0.16)
+      rgba(255, 255, 255, 0.3),
+      rgba(255, 255, 255, 0.06)
     ),
-    color-mix(in srgb, var(--tone-d) 10%, rgba(255, 248, 242, 0.64));
-  backdrop-filter: blur(22px) saturate(0.96);
+    color-mix(in srgb, var(--tone-d) 18%, rgba(255, 248, 242, 0.36));
+  backdrop-filter: blur(20px) saturate(1.1);
 }
 
 .timeline-item__meta {
@@ -1205,7 +1172,17 @@ img {
   grid-template-columns: minmax(280px, 0.82fr) minmax(0, 1fr);
   gap: 42px;
   align-items: center;
-  --section-mist-opacity: 0.56;
+  --section-glaze:
+    linear-gradient(
+      180deg,
+      rgba(242, 232, 243, 0.12),
+      rgba(238, 248, 245, 0.08)
+    ),
+    linear-gradient(
+      120deg,
+      color-mix(in srgb, var(--tone-e) 26%, transparent),
+      transparent
+    );
 }
 
 .image-band__media {
@@ -1227,7 +1204,22 @@ img {
 }
 
 .leadership-band {
-  --section-mist-opacity: 0.6;
+  --section-glaze:
+    radial-gradient(
+      ellipse at 16% 78%,
+      color-mix(in srgb, var(--tone-d) 20%, transparent),
+      transparent 48%
+    ),
+    radial-gradient(
+      circle at 82% 28%,
+      color-mix(in srgb, var(--tone-b) 18%, transparent),
+      transparent 42%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(238, 248, 245, 0.08),
+      rgba(255, 246, 236, 0.1)
+    );
 }
 
 .split-grid {
@@ -1235,7 +1227,18 @@ img {
 }
 
 .credentials-band {
-  --section-mist-opacity: 0.64;
+  --section-glaze:
+    radial-gradient(
+      circle at 12% 72%,
+      color-mix(in srgb, var(--tone-f) 24%, transparent),
+      transparent 44%
+    ),
+    radial-gradient(
+      ellipse at 72% 30%,
+      color-mix(in srgb, var(--tone-d) 18%, transparent),
+      transparent 46%
+    ),
+    linear-gradient(180deg, rgba(255, 246, 236, 0.1), rgba(248, 236, 240, 0.1));
 }
 
 .credential-lists {
@@ -1259,7 +1262,17 @@ img {
 }
 
 .interests-band {
-  --section-mist-opacity: 0.64;
+  --section-glaze:
+    linear-gradient(
+      180deg,
+      rgba(248, 236, 240, 0.1),
+      rgba(255, 248, 242, 0.26)
+    ),
+    linear-gradient(
+      140deg,
+      color-mix(in srgb, var(--tone-d) 28%, transparent),
+      transparent
+    );
 }
 
 .interests-layout {
@@ -1276,16 +1289,16 @@ img {
 .interest-river span {
   padding: 10px 13px;
   background:
-    linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.52),
-      rgba(255, 255, 255, 0.12)
-    ),
-    color-mix(in srgb, var(--tone-c) 12%, rgba(255, 248, 242, 0.82));
+    linear-gradient(135deg, rgba(255, 255, 255, 0.36), rgba(255, 255, 255, 0)),
+    color-mix(in srgb, var(--tone-c) 16%, rgba(255, 248, 242, 0.74));
 }
 
 .contact-band {
-  --section-mist-opacity: 0.7;
+  --section-glaze: linear-gradient(
+    180deg,
+    rgba(255, 248, 242, 0.24),
+    rgba(255, 248, 242, 0.4)
+  );
 }
 
 .contact-layout {

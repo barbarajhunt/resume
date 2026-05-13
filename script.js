@@ -15,53 +15,53 @@ const prefersReducedMotion = window.matchMedia(
 const colorStops = [
   {
     p: 0,
-    a: [201, 87, 224],
-    b: [19, 142, 153],
-    c: [54, 190, 216],
-    d: [254, 113, 88],
-    e: [255, 119, 78],
-    f: [255, 157, 54],
-    heading: [21, 37, 41],
+    a: [185, 107, 198],
+    b: [35, 132, 142],
+    c: [79, 176, 196],
+    d: [242, 127, 105],
+    e: [244, 124, 86],
+    f: [242, 157, 70],
+    heading: [32, 48, 51],
   },
   {
     p: 0.28,
-    a: [110, 132, 244],
-    b: [20, 168, 180],
-    c: [255, 142, 104],
-    d: [254, 113, 88],
-    e: [255, 119, 78],
-    f: [255, 157, 54],
-    heading: [21, 39, 44],
+    a: [125, 139, 226],
+    b: [42, 155, 166],
+    c: [246, 146, 115],
+    d: [242, 120, 100],
+    e: [244, 125, 85],
+    f: [242, 158, 68],
+    heading: [34, 53, 58],
   },
   {
     p: 0.55,
-    a: [254, 113, 88],
-    b: [32, 151, 162],
-    c: [255, 119, 78],
-    d: [255, 91, 48],
-    e: [255, 157, 54],
-    f: [255, 55, 34],
-    heading: [46, 30, 30],
+    a: [242, 123, 101],
+    b: [46, 141, 153],
+    c: [244, 126, 86],
+    d: [242, 93, 64],
+    e: [244, 157, 68],
+    f: [240, 70, 48],
+    heading: [55, 38, 37],
   },
   {
     p: 0.78,
-    a: [255, 119, 78],
-    b: [28, 136, 150],
-    c: [255, 157, 54],
-    d: [254, 113, 88],
-    e: [255, 119, 78],
-    f: [255, 55, 34],
-    heading: [48, 31, 29],
+    a: [244, 126, 86],
+    b: [42, 129, 142],
+    c: [244, 157, 68],
+    d: [242, 120, 100],
+    e: [244, 126, 86],
+    f: [240, 70, 48],
+    heading: [58, 40, 36],
   },
   {
     p: 1,
-    a: [206, 88, 220],
-    b: [22, 132, 146],
-    c: [255, 160, 148],
-    d: [254, 113, 88],
-    e: [255, 157, 54],
-    f: [255, 63, 44],
-    heading: [49, 31, 31],
+    a: [188, 108, 198],
+    b: [39, 125, 138],
+    c: [247, 158, 147],
+    d: [242, 120, 100],
+    e: [244, 157, 68],
+    f: [240, 78, 59],
+    heading: [61, 39, 39],
   },
 ];
 
@@ -180,16 +180,16 @@ const setBlobState = (progress, elapsed = 0, energy = 0) => {
     const phase = index * 1.18;
     const driftX =
       Math.sin(elapsed * 0.00038 + phase + progress * 5.4) *
-        (5.8 + index * 0.45) +
-      energy * (index % 2 === 0 ? 6.5 : -5.2);
+        (2.8 + index * 0.24) +
+      energy * (index % 2 === 0 ? 4.5 : -3.6);
     const driftY =
       Math.cos(elapsed * 0.00032 + phase * 1.3 + progress * 4.8) *
-        (4.8 + index * 0.35) -
-      energy * (index % 3 === 0 ? 4.8 : 2.8);
+        (2.2 + index * 0.2) -
+      energy * (index % 3 === 0 ? 3.2 : 1.6);
     const driftScale =
       1 +
-      Math.sin(elapsed * 0.00042 + phase + progress * 3.2) * 0.075 +
-      energy * 0.1;
+      Math.sin(elapsed * 0.00042 + phase + progress * 3.2) * 0.045 +
+      energy * 0.075;
     const driftOpacity =
       Math.cos(elapsed * 0.00034 + phase) * 0.025 + energy * 0.045;
 
@@ -260,10 +260,10 @@ const applyAtmosphere = (progress, elapsed = 0, energy = 0) => {
   const waveA = Math.sin(elapsed * 0.00034 + progress * 5.2);
   const waveB = Math.cos(elapsed * 0.00027 + progress * 3.7);
   const waveC = Math.sin(elapsed * 0.00019 + progress * 7.1);
-  const ambientX = waveA * 8.2 + waveB * 3.2 + surge * 5.8;
-  const ambientY = waveB * 6 + waveC * 2.6 - surge * 4.8;
-  const sectionFlowX = waveB * 7.4 + surge * 4.2;
-  const sectionFlowY = waveA * 5.6 - surge * 3.6;
+  const ambientX = waveA * 4.2 + waveB * 1.4 + surge * 3.8;
+  const ambientY = waveB * 3.2 + waveC * 1.6 - surge * 3.2;
+  const sectionFlowX = waveB * 3.6 + surge * 2.8;
+  const sectionFlowY = waveA * 2.8 - surge * 2.2;
   const baseScale = lerp(1.14, 1.31, warmth);
   const ambientScale = 1 + waveA * 0.018 + surge * 0.035;
 
@@ -320,15 +320,11 @@ const applyAtmosphere = (progress, elapsed = 0, energy = 0) => {
   );
   root.style.setProperty(
     "--current-x",
-    `${(lerp(-5, 7, motionProgress) + waveA * 4.6 + surge * 3.2).toFixed(
-      2,
-    )}vw`,
+    `${lerp(-5, 7, motionProgress).toFixed(2)}vw`,
   );
   root.style.setProperty(
     "--current-y",
-    `${(lerp(3, -8, motionProgress) + waveB * 4.2 - surge * 3.4).toFixed(
-      2,
-    )}vh`,
+    `${lerp(3, -8, motionProgress).toFixed(2)}vh`,
   );
   root.style.setProperty(
     "--current-scale",
