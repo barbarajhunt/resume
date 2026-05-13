@@ -15,81 +15,91 @@ const prefersReducedMotion = window.matchMedia(
 const colorStops = [
   {
     p: 0,
-    a: [189, 110, 208],
-    b: [36, 121, 134],
-    c: [43, 168, 196],
-    d: [255, 155, 111],
-    e: [255, 79, 50],
-    f: [255, 45, 22],
+    a: [201, 87, 224],
+    b: [19, 142, 153],
+    c: [54, 190, 216],
+    d: [254, 113, 88],
+    e: [255, 119, 78],
+    f: [255, 157, 54],
     heading: [32, 48, 51],
   },
   {
-    p: 0.34,
-    a: [116, 141, 232],
-    b: [22, 155, 170],
-    c: [228, 163, 100],
-    d: [255, 100, 116],
-    e: [255, 103, 41],
-    f: [255, 63, 118],
+    p: 0.28,
+    a: [110, 132, 244],
+    b: [20, 168, 180],
+    c: [255, 142, 104],
+    d: [254, 113, 88],
+    e: [255, 119, 78],
+    f: [255, 157, 54],
     heading: [34, 53, 58],
   },
   {
-    p: 0.68,
-    a: [43, 168, 196],
-    b: [29, 154, 164],
-    c: [255, 100, 116],
-    d: [255, 79, 50],
-    e: [255, 173, 22],
-    f: [255, 45, 22],
+    p: 0.55,
+    a: [254, 113, 88],
+    b: [32, 151, 162],
+    c: [255, 119, 78],
+    d: [255, 91, 48],
+    e: [255, 157, 54],
+    f: [255, 55, 34],
     heading: [55, 38, 37],
   },
   {
+    p: 0.78,
+    a: [255, 119, 78],
+    b: [28, 136, 150],
+    c: [255, 157, 54],
+    d: [254, 113, 88],
+    e: [255, 119, 78],
+    f: [255, 55, 34],
+    heading: [58, 40, 36],
+  },
+  {
     p: 1,
-    a: [189, 110, 208],
-    b: [36, 121, 134],
-    c: [255, 160, 181],
-    d: [255, 63, 118],
-    e: [255, 173, 22],
-    f: [255, 45, 22],
+    a: [206, 88, 220],
+    b: [22, 132, 146],
+    c: [255, 160, 148],
+    d: [254, 113, 88],
+    e: [255, 157, 54],
+    f: [255, 63, 44],
     heading: [61, 39, 39],
   },
 ];
 
 const blobMotion = {
   mauve: [
-    { p: 0, x: 0, y: 0, scale: 1.04, opacity: 0.76 },
-    { p: 0.5, x: -9, y: 16, scale: 1.28, opacity: 0.58 },
-    { p: 1, x: -20, y: 28, scale: 1.48, opacity: 0.42 },
+    { p: 0, x: 0, y: 0, scale: 1.1, opacity: 0.72 },
+    { p: 0.5, x: -16, y: 22, scale: 1.44, opacity: 0.54 },
+    { p: 1, x: -30, y: 42, scale: 1.62, opacity: 0.34 },
   ],
   slate: [
-    { p: 0, x: 0, y: 0, scale: 1.08, opacity: 0.88 },
-    { p: 0.42, x: 14, y: -18, scale: 1.24, opacity: 0.92 },
-    { p: 1, x: 24, y: -32, scale: 1.02, opacity: 0.58 },
+    { p: 0, x: 0, y: 0, scale: 1.12, opacity: 0.9 },
+    { p: 0.42, x: 24, y: -26, scale: 1.36, opacity: 0.96 },
+    { p: 1, x: 38, y: -48, scale: 1.08, opacity: 0.56 },
   ],
   blue: [
-    { p: 0, x: 0, y: 0, scale: 1.08, opacity: 0.78 },
-    { p: 0.46, x: 16, y: 17, scale: 1.34, opacity: 0.9 },
-    { p: 1, x: -12, y: -18, scale: 1.08, opacity: 0.5 },
+    { p: 0, x: 0, y: 0, scale: 1.12, opacity: 0.82 },
+    { p: 0.46, x: 26, y: 24, scale: 1.52, opacity: 0.94 },
+    { p: 1, x: -22, y: -28, scale: 1.14, opacity: 0.48 },
   ],
   salmon: [
-    { p: 0, x: -12, y: 18, scale: 0.88, opacity: 0.3 },
-    { p: 0.48, x: 17, y: -12, scale: 1.36, opacity: 0.86 },
-    { p: 1, x: 20, y: -28, scale: 1.56, opacity: 0.72 },
+    { p: 0, x: -20, y: 24, scale: 1, opacity: 0.52 },
+    { p: 0.48, x: 24, y: -20, scale: 1.6, opacity: 0.96 },
+    { p: 1, x: 34, y: -48, scale: 1.8, opacity: 0.82 },
   ],
   coral: [
-    { p: 0, x: -16, y: 28, scale: 0.9, opacity: 0.5 },
-    { p: 0.65, x: 10, y: -22, scale: 1.42, opacity: 0.94 },
-    { p: 1, x: 22, y: -40, scale: 1.62, opacity: 0.86 },
+    { p: 0, x: -22, y: 30, scale: 1.1, opacity: 0.78 },
+    { p: 0.65, x: 18, y: -34, scale: 1.78, opacity: 1 },
+    { p: 1, x: 38, y: -58, scale: 1.95, opacity: 0.96 },
   ],
   orange: [
-    { p: 0, x: 16, y: 28, scale: 0.86, opacity: 0.42 },
-    { p: 0.62, x: -14, y: -18, scale: 1.28, opacity: 0.88 },
-    { p: 1, x: -32, y: -44, scale: 1.58, opacity: 0.96 },
+    { p: 0, x: 22, y: 32, scale: 1, opacity: 0.62 },
+    { p: 0.62, x: -24, y: -28, scale: 1.62, opacity: 0.98 },
+    { p: 1, x: -46, y: -62, scale: 1.9, opacity: 1 },
   ],
   pink: [
-    { p: 0, x: 0, y: 24, scale: 0.9, opacity: 0.28 },
-    { p: 0.5, x: -10, y: -9, scale: 1.18, opacity: 0.7 },
-    { p: 1, x: -22, y: -34, scale: 1.42, opacity: 0.88 },
+    { p: 0, x: 0, y: 28, scale: 0.96, opacity: 0.36 },
+    { p: 0.5, x: -18, y: -14, scale: 1.32, opacity: 0.78 },
+    { p: 1, x: -34, y: -48, scale: 1.58, opacity: 0.9 },
   ],
 };
 
@@ -121,6 +131,8 @@ const mixArray = (from, to, amount) =>
 const mixNumber = (from, to, amount) => lerp(from, to, amount);
 
 const rgb = (parts) => `rgb(${parts[0]}, ${parts[1]}, ${parts[2]})`;
+
+const clamp01 = (value) => Math.min(Math.max(value, 0), 1);
 
 const setPalette = (progress) => {
   const stop = betweenStops(colorStops, progress);
@@ -217,9 +229,45 @@ const updateTargetProgress = () => {
 };
 
 const applyAtmosphere = (progress) => {
+  const warmth = clamp01(0.22 + progress * 1.18);
+  const motionProgress = prefersReducedMotion ? 0 : progress;
+
   root.style.setProperty("--scroll", progress.toFixed(4));
   root.style.setProperty("--flow", progress.toFixed(4));
-  root.style.setProperty("--warmth", Math.min(progress * 1.24, 1).toFixed(4));
+  root.style.setProperty("--warmth", warmth.toFixed(4));
+  root.style.setProperty(
+    "--warm-glow-opacity",
+    (0.34 + warmth * 0.34).toFixed(3),
+  );
+  root.style.setProperty("--veil-opacity", (0.42 - warmth * 0.16).toFixed(3));
+  root.style.setProperty(
+    "--base-x",
+    `${lerp(-2, 7, motionProgress).toFixed(2)}vw`,
+  );
+  root.style.setProperty(
+    "--base-y",
+    `${lerp(0, -10, motionProgress).toFixed(2)}vh`,
+  );
+  root.style.setProperty(
+    "--base-scale",
+    lerp(1.14, 1.31, warmth).toFixed(3),
+  );
+  root.style.setProperty(
+    "--base-rotate",
+    `${lerp(-1.5, 2.5, motionProgress).toFixed(2)}deg`,
+  );
+  root.style.setProperty(
+    "--current-x",
+    `${lerp(-5, 7, motionProgress).toFixed(2)}vw`,
+  );
+  root.style.setProperty(
+    "--current-y",
+    `${lerp(3, -8, motionProgress).toFixed(2)}vh`,
+  );
+  root.style.setProperty(
+    "--current-scale",
+    lerp(1.04, 1.22, warmth).toFixed(3),
+  );
   setPalette(progress);
   setBlobState(prefersReducedMotion ? 0 : progress);
 };
@@ -228,7 +276,7 @@ const animateAtmosphere = () => {
   if (prefersReducedMotion) {
     fluidProgress = targetProgress;
   } else {
-    fluidProgress += (targetProgress - fluidProgress) * 0.12;
+    fluidProgress += (targetProgress - fluidProgress) * 0.18;
 
     if (Math.abs(targetProgress - fluidProgress) < 0.0004) {
       fluidProgress = targetProgress;

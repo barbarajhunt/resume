@@ -1,19 +1,19 @@
 :root {
-  --mauve: #bd6ed0;
-  --slate-teal: #247986;
-  --top-teal: #1d9aa4;
-  --blue-teal: #2ba8c4;
-  --periwinkle: #748de8;
-  --aquatic-teal: #169baa;
-  --salmon: #ff6474;
-  --peach-rose: #ff9b6f;
-  --tan: #e4a364;
-  --coral: #ff4f32;
-  --warm-coral: #ff6729;
-  --orange: #ffad16;
-  --soft-pink: #ffa0b5;
-  --coral-pink: #ff3f76;
-  --red-orange: #ff2d16;
+  --mauve: #c957e0;
+  --slate-teal: #138e99;
+  --top-teal: #16a8b4;
+  --blue-teal: #36bed8;
+  --periwinkle: #6e84f4;
+  --aquatic-teal: #0fb6c0;
+  --salmon: #ff6578;
+  --peach-rose: #ff8e68;
+  --tan: #f0a257;
+  --coral: #fe7158;
+  --warm-coral: #ff774e;
+  --orange: #ff9d36;
+  --soft-pink: #ffa0bc;
+  --coral-pink: #ff3d79;
+  --red-orange: #ff3722;
   --lavender: var(--mauve);
   --teal: var(--top-teal);
   --water: #609090;
@@ -27,16 +27,25 @@
   --paper: #fff8f2;
   --paper-soft: rgba(255, 248, 242, 0.52);
   --line: rgba(32, 48, 51, 0.18);
-  --tone-a: #bd6ed0;
-  --tone-b: #1d9aa4;
-  --tone-c: #ff9b6f;
-  --tone-d: #ff4f32;
-  --tone-e: #ffad16;
-  --tone-f: #ff2d16;
+  --tone-a: #c957e0;
+  --tone-b: #16a8b4;
+  --tone-c: #ff8e68;
+  --tone-d: #fe7158;
+  --tone-e: #ff774e;
+  --tone-f: #ff9d36;
   --heading-tone: #203033;
   --scroll: 0;
   --flow: 0;
   --warmth: 0;
+  --warm-glow-opacity: 0.38;
+  --veil-opacity: 0.4;
+  --base-x: 0vw;
+  --base-y: 0vh;
+  --base-scale: 1.14;
+  --base-rotate: -1deg;
+  --current-x: 0vw;
+  --current-y: 0vh;
+  --current-scale: 1.06;
   --header-h: 72px;
   color-scheme: light;
 }
@@ -82,27 +91,76 @@ img {
   background:
     radial-gradient(
       circle at 20% 10%,
-      color-mix(in srgb, var(--tone-a) 78%, transparent) 0%,
+      color-mix(in srgb, var(--tone-a) 86%, transparent) 0%,
       transparent 38%
     ),
     radial-gradient(
       circle at 76% 16%,
-      color-mix(in srgb, var(--tone-b) 78%, transparent) 0%,
+      color-mix(in srgb, var(--tone-b) 84%, transparent) 0%,
       transparent 42%
     ),
     radial-gradient(
       circle at 55% 36%,
-      color-mix(in srgb, var(--blue-teal) 58%, transparent) 0%,
+      color-mix(in srgb, var(--blue-teal) 68%, transparent) 0%,
       transparent 48%
+    ),
+    radial-gradient(
+      ellipse at 22% 62%,
+      color-mix(in srgb, var(--coral) 72%, transparent) 0%,
+      transparent 42%
+    ),
+    radial-gradient(
+      ellipse at 55% 76%,
+      color-mix(in srgb, var(--warm-coral) 74%, transparent) 0%,
+      transparent 48%
+    ),
+    radial-gradient(
+      ellipse at 84% 82%,
+      color-mix(in srgb, var(--orange) 70%, transparent) 0%,
+      transparent 46%
     ),
     linear-gradient(
       180deg,
       var(--periwinkle) 0%,
-      var(--peach-rose) 48%,
-      var(--coral) 100%
+      var(--blue-teal) 25%,
+      var(--peach-rose) 44%,
+      var(--coral) 66%,
+      var(--warm-coral) 84%,
+      var(--orange) 100%
     );
-  filter: saturate(1.28) contrast(1.04);
+  filter: saturate(1.5) contrast(1.1);
   transition: background 900ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.color-field::before {
+  content: "";
+  position: absolute;
+  inset: -18%;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse at 20% 62%,
+      color-mix(in srgb, var(--coral) 92%, transparent) 0%,
+      transparent 36%
+    ),
+    radial-gradient(
+      ellipse at 53% 72%,
+      color-mix(in srgb, var(--warm-coral) 94%, transparent) 0%,
+      transparent 44%
+    ),
+    radial-gradient(
+      ellipse at 86% 78%,
+      color-mix(in srgb, var(--orange) 86%, transparent) 0%,
+      transparent 42%
+    );
+  opacity: var(--warm-glow-opacity);
+  filter: blur(42px) saturate(1.75) contrast(1.08);
+  transform: translate3d(var(--current-x), var(--current-y), 0)
+    scale(var(--current-scale));
+  will-change: transform, opacity;
+  animation: warm-current 8.5s cubic-bezier(0.22, 1, 0.36, 1) infinite
+    alternate;
 }
 
 .color-field__base,
@@ -113,7 +171,8 @@ img {
 }
 
 .color-field__base {
-  inset: -10%;
+  inset: -14%;
+  z-index: 0;
   background:
     radial-gradient(
       circle at 18% 12%,
@@ -146,8 +205,18 @@ img {
       transparent 40%
     ),
     radial-gradient(
+      ellipse at 24% 64%,
+      color-mix(in srgb, var(--coral) 100%, transparent) 0%,
+      transparent 48%
+    ),
+    radial-gradient(
+      ellipse at 52% 72%,
+      color-mix(in srgb, var(--warm-coral) 100%, transparent) 0%,
+      transparent 52%
+    ),
+    radial-gradient(
       circle at 82% 70%,
-      color-mix(in srgb, var(--orange) 98%, transparent) 0%,
+      color-mix(in srgb, var(--orange) 100%, transparent) 0%,
       transparent 48%
     ),
     radial-gradient(
@@ -155,23 +224,34 @@ img {
       color-mix(in srgb, var(--coral-pink) 96%, transparent) 0%,
       transparent 42%
     ),
+    radial-gradient(
+      ellipse at 70% 92%,
+      color-mix(in srgb, var(--red-orange) 76%, transparent) 0%,
+      transparent 44%
+    ),
     linear-gradient(
       180deg,
       color-mix(in srgb, var(--periwinkle) 88%, var(--paper)) 0%,
-      color-mix(in srgb, var(--tan) 54%, var(--peach-rose)) 46%,
-      var(--warm-coral) 100%
+      color-mix(in srgb, var(--blue-teal) 70%, var(--periwinkle)) 24%,
+      color-mix(in srgb, var(--peach-rose) 78%, var(--tan)) 42%,
+      var(--coral) 62%,
+      var(--warm-coral) 82%,
+      var(--orange) 100%
     );
   opacity: 1;
-  filter: blur(8px) saturate(1.5) contrast(1.08);
-  transform: translate3d(0, 0, 0) scale(1.1);
+  filter: blur(5px) saturate(1.78) contrast(1.16);
+  transform: translate3d(var(--base-x), var(--base-y), 0)
+    scale(var(--base-scale)) rotate(var(--base-rotate));
+  will-change: transform;
 }
 
 .color-field__blob {
   position: absolute;
   border-radius: 50%;
-  opacity: 0.86;
-  filter: blur(68px) saturate(1.62) contrast(1.05);
-  mix-blend-mode: screen;
+  z-index: 2;
+  opacity: 0.94;
+  filter: blur(54px) saturate(2.1) contrast(1.1);
+  mix-blend-mode: normal;
   pointer-events: none;
   transform: translate3d(0, 0, 0) scale(1);
   transform-origin: center;
@@ -184,7 +264,7 @@ img {
   inset: 0;
   border-radius: inherit;
   background: var(--blob-fill);
-  animation: atmospheric-pulse 11s cubic-bezier(0.22, 1, 0.36, 1) infinite
+  animation: atmospheric-pulse 7.5s cubic-bezier(0.22, 1, 0.36, 1) infinite
     alternate;
 }
 
@@ -228,41 +308,43 @@ img {
 }
 
 .color-field__blob--salmon {
-  top: 28vh;
-  left: -18vmax;
-  width: 72vmax;
-  height: 64vmax;
-  --blob-fill: radial-gradient(
-    circle,
-    var(--salmon) 0%,
-    color-mix(in srgb, var(--peach-rose) 62%, transparent) 48%,
-    transparent 76%
-  );
-}
-
-.color-field__blob--coral {
-  bottom: -20vmax;
-  left: -12vmax;
-  width: 86vmax;
+  top: 24vh;
+  left: -22vmax;
+  width: 82vmax;
   height: 72vmax;
   --blob-fill: radial-gradient(
     circle,
-    var(--coral) 0%,
-    color-mix(in srgb, var(--warm-coral) 62%, transparent) 48%,
+    var(--salmon) 0%,
+    color-mix(in srgb, var(--coral) 66%, transparent) 50%,
     transparent 78%
   );
 }
 
-.color-field__blob--orange {
-  right: -22vmax;
-  bottom: -16vmax;
-  width: 86vmax;
+.color-field__blob--coral {
+  bottom: -26vmax;
+  left: -18vmax;
+  width: 110vmax;
   height: 86vmax;
   --blob-fill: radial-gradient(
     circle,
+    var(--coral) 0%,
+    color-mix(in srgb, var(--warm-coral) 72%, transparent) 48%,
+    color-mix(in srgb, var(--orange) 30%, transparent) 64%,
+    transparent 82%
+  );
+}
+
+.color-field__blob--orange {
+  right: -28vmax;
+  bottom: -22vmax;
+  width: 104vmax;
+  height: 104vmax;
+  --blob-fill: radial-gradient(
+    circle,
     var(--orange) 0%,
-    color-mix(in srgb, var(--red-orange) 54%, transparent) 48%,
-    transparent 76%
+    color-mix(in srgb, var(--warm-coral) 66%, transparent) 46%,
+    color-mix(in srgb, var(--red-orange) 46%, transparent) 62%,
+    transparent 80%
   );
 }
 
@@ -280,12 +362,13 @@ img {
 }
 
 .color-field__veil {
+  z-index: 3;
   background:
     linear-gradient(
       180deg,
-      rgba(255, 248, 242, 0.12) 0%,
-      rgba(255, 248, 242, 0.24) 50%,
-      rgba(255, 248, 242, 0.38) 100%
+      rgba(255, 248, 242, 0.06) 0%,
+      rgba(255, 248, 242, 0.16) 50%,
+      rgba(255, 248, 242, 0.24) 100%
     ),
     radial-gradient(
       circle at 80% 28%,
@@ -297,22 +380,39 @@ img {
       color-mix(in srgb, var(--soft-pink) 18%, transparent),
       transparent 44%
     );
-  opacity: 0.62;
+  opacity: var(--veil-opacity);
 }
 
 @keyframes atmospheric-pulse {
   0% {
-    transform: scale(0.96) rotate(-2deg);
-    filter: saturate(1.05);
+    transform: scale(0.92) rotate(-4deg);
+    filter: saturate(1.12);
   }
 
   100% {
-    transform: scale(1.2) rotate(8deg);
-    filter: saturate(1.36);
+    transform: scale(1.34) rotate(12deg);
+    filter: saturate(1.55);
+  }
+}
+
+@keyframes warm-current {
+  0% {
+    transform: translate3d(calc(var(--current-x) - 3vw), var(--current-y), 0)
+      scale(var(--current-scale)) rotate(-2deg);
+  }
+
+  100% {
+    transform: translate3d(
+        calc(var(--current-x) + 4vw),
+        calc(var(--current-y) - 3vh),
+        0
+      )
+      scale(calc(var(--current-scale) + 0.08)) rotate(4deg);
   }
 }
 
 .color-field__grain {
+  z-index: 4;
   background-image:
     radial-gradient(circle, rgba(32, 48, 51, 0.14) 0.7px, transparent 0.8px),
     radial-gradient(circle, rgba(255, 255, 255, 0.24) 0.8px, transparent 0.9px),
@@ -461,23 +561,28 @@ img {
   background:
     radial-gradient(
       circle at 18% 20%,
-      rgba(255, 248, 242, 0.52),
-      rgba(255, 248, 242, 0.24) 42%,
+      rgba(255, 248, 242, 0.42),
+      rgba(255, 248, 242, 0.16) 42%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse at 24% 76%,
+      color-mix(in srgb, var(--warm-coral) 26%, transparent),
       transparent 70%
     ),
     radial-gradient(
       circle at 78% 18%,
-      color-mix(in srgb, var(--slate-teal) 20%, transparent),
+      color-mix(in srgb, var(--slate-teal) 24%, transparent),
       transparent 48%
     ),
     linear-gradient(
       105deg,
-      rgba(255, 248, 242, 0.7),
-      rgba(255, 248, 242, 0.16) 54%,
+      rgba(255, 248, 242, 0.56),
+      rgba(255, 248, 242, 0.08) 54%,
       transparent 88%
     ),
-    linear-gradient(180deg, transparent, rgba(255, 248, 242, 0.26));
-  opacity: 0.84;
+    linear-gradient(180deg, transparent, rgba(255, 248, 242, 0.14));
+  opacity: 0.72;
   transform: scale(1.01);
 }
 
@@ -488,7 +593,7 @@ img {
   right: 0;
   bottom: -1px;
   height: 160px;
-  background: linear-gradient(180deg, transparent, rgba(255, 248, 242, 0.54));
+  background: linear-gradient(180deg, transparent, rgba(255, 248, 242, 0.32));
   pointer-events: none;
 }
 
@@ -613,7 +718,7 @@ img {
 }
 
 .button--secondary {
-  background: rgba(255, 248, 242, 0.68);
+  background: rgba(255, 248, 242, 0.56);
 }
 
 .hero__notes {
@@ -629,7 +734,7 @@ img {
 .tag-list li {
   border: 1px solid rgba(32, 48, 51, 0.14);
   border-radius: 8px;
-  background: rgba(255, 248, 242, 0.5);
+  background: rgba(255, 248, 242, 0.42);
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.28);
 }
 
@@ -641,14 +746,19 @@ img {
 .intro-band {
   background:
     radial-gradient(
+      ellipse at 22% 78%,
+      color-mix(in srgb, var(--tone-d) 24%, transparent),
+      transparent 48%
+    ),
+    radial-gradient(
       circle at 78% 8%,
-      color-mix(in srgb, var(--tone-b) 18%, transparent),
+      color-mix(in srgb, var(--tone-b) 22%, transparent),
       transparent 44%
     ),
     linear-gradient(
       180deg,
-      rgba(255, 248, 242, 0.52),
-      rgba(255, 248, 242, 0.22)
+      rgba(255, 248, 242, 0.34),
+      rgba(255, 248, 242, 0.08)
     );
 }
 
@@ -698,10 +808,10 @@ img {
     ),
     linear-gradient(
       180deg,
-      rgba(255, 255, 255, 0.46),
-      rgba(255, 255, 255, 0.12)
+      rgba(255, 255, 255, 0.34),
+      rgba(255, 255, 255, 0.06)
     ),
-    color-mix(in srgb, var(--tone-a) 12%, rgba(255, 248, 242, 0.48));
+    color-mix(in srgb, var(--tone-d) 12%, rgba(255, 248, 242, 0.38));
   box-shadow: 0 20px 70px rgba(85, 126, 122, 0.12);
   backdrop-filter: blur(22px) saturate(1.12);
   transition:
@@ -718,7 +828,7 @@ img {
   pointer-events: none;
   background: linear-gradient(
     135deg,
-    color-mix(in srgb, var(--tone-c) 22%, transparent),
+    color-mix(in srgb, var(--tone-e) 28%, transparent),
     transparent 42%
   );
   opacity: 0.72;
@@ -754,14 +864,19 @@ img {
 
 .current-band {
   background:
+    radial-gradient(
+      ellipse at 74% 74%,
+      color-mix(in srgb, var(--tone-e) 26%, transparent),
+      transparent 52%
+    ),
     linear-gradient(
       180deg,
-      rgba(243, 250, 247, 0.28),
-      rgba(255, 241, 229, 0.2)
+      rgba(243, 250, 247, 0.18),
+      rgba(255, 241, 229, 0.08)
     ),
     linear-gradient(
       120deg,
-      color-mix(in srgb, var(--tone-c) 18%, transparent),
+      color-mix(in srgb, var(--tone-d) 24%, transparent),
       transparent
     );
 }
@@ -819,8 +934,8 @@ img {
     ),
     linear-gradient(
       135deg,
-      rgba(255, 248, 242, 0.72),
-      rgba(255, 255, 255, 0.22)
+      rgba(255, 248, 242, 0.58),
+      rgba(255, 255, 255, 0.12)
     );
   box-shadow: 0 24px 80px rgba(32, 48, 51, 0.14);
 }
@@ -828,7 +943,7 @@ img {
 .metric-panel div {
   padding: 22px;
   border-radius: 8px;
-  background: rgba(255, 248, 242, 0.74);
+  background: rgba(255, 248, 242, 0.58);
 }
 
 .metric-panel__number {
@@ -856,10 +971,15 @@ img {
   background:
     radial-gradient(
       circle at 18% 20%,
-      color-mix(in srgb, var(--tone-d) 18%, transparent),
+      color-mix(in srgb, var(--tone-d) 34%, transparent),
       transparent 46%
     ),
-    linear-gradient(180deg, rgba(255, 241, 229, 0.24), rgba(242, 232, 243, 0.2));
+    radial-gradient(
+      ellipse at 78% 76%,
+      color-mix(in srgb, var(--tone-e) 28%, transparent),
+      transparent 52%
+    ),
+    linear-gradient(180deg, rgba(255, 241, 229, 0.12), rgba(242, 232, 243, 0.1));
 }
 
 .timeline {
@@ -924,10 +1044,10 @@ img {
   background:
     linear-gradient(
       135deg,
-      rgba(255, 255, 255, 0.42),
-      rgba(255, 255, 255, 0.1)
+      rgba(255, 255, 255, 0.3),
+      rgba(255, 255, 255, 0.06)
     ),
-    color-mix(in srgb, var(--tone-c) 16%, rgba(255, 248, 242, 0.46));
+    color-mix(in srgb, var(--tone-d) 18%, rgba(255, 248, 242, 0.36));
   backdrop-filter: blur(20px) saturate(1.1);
 }
 
@@ -951,12 +1071,12 @@ img {
   background:
     linear-gradient(
       180deg,
-      rgba(242, 232, 243, 0.22),
-      rgba(238, 248, 245, 0.18)
+      rgba(242, 232, 243, 0.12),
+      rgba(238, 248, 245, 0.08)
     ),
     linear-gradient(
       120deg,
-      color-mix(in srgb, var(--tone-e) 18%, transparent),
+      color-mix(in srgb, var(--tone-e) 26%, transparent),
       transparent
     );
 }
@@ -982,14 +1102,19 @@ img {
 .leadership-band {
   background:
     radial-gradient(
+      ellipse at 16% 78%,
+      color-mix(in srgb, var(--tone-d) 20%, transparent),
+      transparent 48%
+    ),
+    radial-gradient(
       circle at 82% 28%,
-      color-mix(in srgb, var(--tone-b) 14%, transparent),
+      color-mix(in srgb, var(--tone-b) 18%, transparent),
       transparent 42%
     ),
     linear-gradient(
       180deg,
-      rgba(238, 248, 245, 0.18),
-      rgba(255, 246, 236, 0.22)
+      rgba(238, 248, 245, 0.08),
+      rgba(255, 246, 236, 0.1)
     );
 }
 
@@ -1001,10 +1126,15 @@ img {
   background:
     radial-gradient(
       circle at 12% 72%,
-      color-mix(in srgb, var(--tone-f) 12%, transparent),
+      color-mix(in srgb, var(--tone-f) 24%, transparent),
       transparent 44%
     ),
-    linear-gradient(180deg, rgba(255, 246, 236, 0.2), rgba(248, 236, 240, 0.2));
+    radial-gradient(
+      ellipse at 72% 30%,
+      color-mix(in srgb, var(--tone-d) 18%, transparent),
+      transparent 46%
+    ),
+    linear-gradient(180deg, rgba(255, 246, 236, 0.1), rgba(248, 236, 240, 0.1));
 }
 
 .credential-lists {
@@ -1031,12 +1161,12 @@ img {
   background:
     linear-gradient(
       180deg,
-      rgba(248, 236, 240, 0.2),
-      rgba(255, 248, 242, 0.42)
+      rgba(248, 236, 240, 0.1),
+      rgba(255, 248, 242, 0.26)
     ),
     linear-gradient(
       140deg,
-      color-mix(in srgb, var(--tone-d) 14%, transparent),
+      color-mix(in srgb, var(--tone-d) 28%, transparent),
       transparent
     );
 }
@@ -1062,8 +1192,8 @@ img {
 .contact-band {
   background: linear-gradient(
     180deg,
-    rgba(255, 248, 242, 0.42),
-    rgba(255, 248, 242, 0.58)
+    rgba(255, 248, 242, 0.24),
+    rgba(255, 248, 242, 0.4)
   );
 }
 
@@ -1083,7 +1213,7 @@ img {
   gap: 18px;
   padding: 28px max(24px, calc((100vw - 1180px) / 2));
   color: var(--ink-soft);
-  background: rgba(255, 248, 242, 0.58);
+  background: rgba(255, 248, 242, 0.42);
   border-top: 1px solid rgba(32, 48, 51, 0.1);
 }
 
