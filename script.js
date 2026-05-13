@@ -158,8 +158,8 @@ const setPalette = (progress) => {
   });
 };
 
-const setBlobState = (progress) => {
-  Object.entries(blobMotion).forEach(([name, stops]) => {
+const setBlobState = (progress, elapsed = 0, energy = 0) => {
+  Object.entries(blobMotion).forEach(([name, stops], index) => {
     const element = blobElements.get(name);
 
     if (!element) {
@@ -177,8 +177,24 @@ const setBlobState = (progress) => {
           }
         : stop;
 
-    element.style.opacity = state.opacity.toFixed(3);
-    element.style.transform = `translate3d(${state.x.toFixed(2)}vw, ${state.y.toFixed(2)}vh, 0) scale(${state.scale.toFixed(3)})`;
+    const phase = index * 1.18;
+    const driftX =
+      Math.sin(elapsed * 0.00038 + phase + progress * 5.4) *
+        (2.8 + index * 0.24) +
+      energy * (index % 2 === 0 ? 4.5 : -3.6);
+    const driftY =
+      Math.cos(elapsed * 0.00032 + phase * 1.3 + progress * 4.8) *
+        (2.2 + index * 0.2) -
+      energy * (index % 3 === 0 ? 3.2 : 1.6);
+    const driftScale =
+      1 +
+      Math.sin(elapsed * 0.00042 + phase + progress * 3.2) * 0.045 +
+      energy * 0.075;
+    const driftOpacity =
+      Math.cos(elapsed * 0.00034 + phase) * 0.025 + energy * 0.045;
+
+    element.style.opacity = clamp01(state.opacity + driftOpacity).toFixed(3);
+    element.style.transform = `translate3d(${(state.x + driftX).toFixed(2)}vw, ${(state.y + driftY).toFixed(2)}vh, 0) scale(${(state.scale * driftScale).toFixed(3)})`;
   });
 };
 
@@ -194,6 +210,9 @@ let targetProgress = 0;
 let fluidProgress = 0;
 let frame = 0;
 let isAnimating = false;
+let lastScrollTop = window.scrollY || document.documentElement.scrollTop || 0;
+let targetEnergy = 0;
+let scrollEnergy = 0;
 
 const updateTargetProgress = () => {
   const scrollTop = window.scrollY || document.documentElement.scrollTop;
@@ -203,6 +222,12 @@ const updateTargetProgress = () => {
   );
 
   targetProgress = Math.min(Math.max(scrollTop / maxScroll, 0), 1);
+
+  const scrollDelta = Math.abs(scrollTop - lastScrollTop);
+  if (scrollDelta > 0) {
+    targetEnergy = clamp01(targetEnergy + Math.min(scrollDelta / 680, 0.42));
+  }
+  lastScrollTop = scrollTop;
 
   if (header) {
     header.classList.toggle("is-scrolled", scrollTop > 12);
@@ -228,18 +253,51 @@ const updateTargetProgress = () => {
   });
 };
 
-const applyAtmosphere = (progress) => {
+const applyAtmosphere = (progress, elapsed = 0, energy = 0) => {
   const warmth = clamp01(0.22 + progress * 1.18);
   const motionProgress = prefersReducedMotion ? 0 : progress;
+  const surge = prefersReducedMotion ? 0 : clamp01(energy);
+  const waveA = Math.sin(elapsed * 0.00034 + progress * 5.2);
+  const waveB = Math.cos(elapsed * 0.00027 + progress * 3.7);
+  const waveC = Math.sin(elapsed * 0.00019 + progress * 7.1);
+  const ambientX = waveA * 4.2 + waveB * 1.4 + surge * 3.8;
+  const ambientY = waveB * 3.2 + waveC * 1.6 - surge * 3.2;
+  const sectionFlowX = waveB * 3.6 + surge * 2.8;
+  const sectionFlowY = waveA * 2.8 - surge * 2.2;
+  const baseScale = lerp(1.14, 1.31, warmth);
+  const ambientScale = 1 + waveA * 0.018 + surge * 0.035;
 
   root.style.setProperty("--scroll", progress.toFixed(4));
   root.style.setProperty("--flow", progress.toFixed(4));
   root.style.setProperty("--warmth", warmth.toFixed(4));
+  root.style.setProperty("--surge", surge.toFixed(4));
+  root.style.setProperty("--surge-opacity", (0.34 + surge * 0.24).toFixed(3));
+  root.style.setProperty("--surge-scale", (1.08 + surge * 0.1).toFixed(3));
+  root.style.setProperty("--ambient-x", `${ambientX.toFixed(2)}vw`);
+  root.style.setProperty("--ambient-y", `${ambientY.toFixed(2)}vh`);
+  root.style.setProperty(
+    "--ambient-inverse-x",
+    `${(-ambientX * 1.25).toFixed(2)}vw`,
+  );
+  root.style.setProperty(
+    "--ambient-counter-y",
+    `${(ambientY * 1.35).toFixed(2)}vh`,
+  );
+  root.style.setProperty(
+    "--ambient-rotate",
+    `${(waveC * 1.5 + surge * 1.2).toFixed(2)}deg`,
+  );
+  root.style.setProperty("--ambient-scale", ambientScale.toFixed(3));
+  root.style.setProperty("--section-flow-x", `${sectionFlowX.toFixed(2)}vw`);
+  root.style.setProperty("--section-flow-y", `${sectionFlowY.toFixed(2)}vh`);
   root.style.setProperty(
     "--warm-glow-opacity",
-    (0.34 + warmth * 0.34).toFixed(3),
+    (0.34 + warmth * 0.34 + surge * 0.08).toFixed(3),
   );
-  root.style.setProperty("--veil-opacity", (0.42 - warmth * 0.16).toFixed(3));
+  root.style.setProperty(
+    "--veil-opacity",
+    (0.42 - warmth * 0.16 - surge * 0.06).toFixed(3),
+  );
   root.style.setProperty(
     "--base-x",
     `${lerp(-2, 7, motionProgress).toFixed(2)}vw`,
@@ -250,7 +308,11 @@ const applyAtmosphere = (progress) => {
   );
   root.style.setProperty(
     "--base-scale",
-    lerp(1.14, 1.31, warmth).toFixed(3),
+    baseScale.toFixed(3),
+  );
+  root.style.setProperty(
+    "--base-scale-active",
+    (baseScale * ambientScale).toFixed(3),
   );
   root.style.setProperty(
     "--base-rotate",
@@ -266,29 +328,45 @@ const applyAtmosphere = (progress) => {
   );
   root.style.setProperty(
     "--current-scale",
-    lerp(1.04, 1.22, warmth).toFixed(3),
+    (lerp(1.04, 1.22, warmth) + surge * 0.07).toFixed(3),
   );
   setPalette(progress);
-  setBlobState(prefersReducedMotion ? 0 : progress);
+  setBlobState(prefersReducedMotion ? 0 : progress, elapsed, surge);
 };
 
-const animateAtmosphere = () => {
+const animateAtmosphere = (elapsed = 0) => {
   if (prefersReducedMotion) {
     fluidProgress = targetProgress;
+    scrollEnergy = 0;
   } else {
-    fluidProgress += (targetProgress - fluidProgress) * 0.18;
+    fluidProgress += (targetProgress - fluidProgress) * 0.14;
+    scrollEnergy += (targetEnergy - scrollEnergy) * 0.14;
+    targetEnergy *= 0.92;
 
     if (Math.abs(targetProgress - fluidProgress) < 0.0004) {
       fluidProgress = targetProgress;
-      isAnimating = false;
+    }
+
+    if (targetEnergy < 0.001) {
+      targetEnergy = 0;
     }
   }
 
-  applyAtmosphere(fluidProgress);
+  applyAtmosphere(fluidProgress, elapsed, scrollEnergy);
 
-  if (isAnimating) {
+  if (!prefersReducedMotion) {
     frame = requestAnimationFrame(animateAtmosphere);
   }
+};
+
+const startAtmosphere = () => {
+  if (prefersReducedMotion || isAnimating) {
+    return;
+  }
+
+  isAnimating = true;
+  cancelAnimationFrame(frame);
+  frame = requestAnimationFrame(animateAtmosphere);
 };
 
 const scheduleSync = () => {
@@ -299,11 +377,7 @@ const scheduleSync = () => {
     return;
   }
 
-  if (!isAnimating) {
-    isAnimating = true;
-    cancelAnimationFrame(frame);
-    frame = requestAnimationFrame(animateAtmosphere);
-  }
+  startAtmosphere();
 };
 
 const observer = new IntersectionObserver(

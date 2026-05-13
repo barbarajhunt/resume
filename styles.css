@@ -42,10 +42,22 @@
   --base-x: 0vw;
   --base-y: 0vh;
   --base-scale: 1.14;
+  --base-scale-active: 1.14;
   --base-rotate: -1deg;
   --current-x: 0vw;
   --current-y: 0vh;
   --current-scale: 1.06;
+  --ambient-x: 0vw;
+  --ambient-y: 0vh;
+  --ambient-inverse-x: 0vw;
+  --ambient-counter-y: 0vh;
+  --ambient-rotate: 0deg;
+  --ambient-scale: 1;
+  --section-flow-x: 0vw;
+  --section-flow-y: 0vh;
+  --surge: 0;
+  --surge-opacity: 0.34;
+  --surge-scale: 1.08;
   --header-h: 72px;
   color-scheme: light;
 }
@@ -240,9 +252,41 @@ img {
     );
   opacity: 1;
   filter: blur(5px) saturate(1.78) contrast(1.16);
-  transform: translate3d(var(--base-x), var(--base-y), 0)
-    scale(var(--base-scale)) rotate(var(--base-rotate));
+  transform: translate3d(
+      calc(var(--base-x) + var(--ambient-x)),
+      calc(var(--base-y) + var(--ambient-y)),
+      0
+    )
+    scale(var(--base-scale-active))
+    rotate(calc(var(--base-rotate) + var(--ambient-rotate)));
   will-change: transform;
+}
+
+.color-field__base::after {
+  content: "";
+  position: absolute;
+  inset: -8%;
+  background:
+    radial-gradient(
+      ellipse at 72% 30%,
+      color-mix(in srgb, var(--tone-b) 34%, transparent) 0%,
+      transparent 46%
+    ),
+    radial-gradient(
+      ellipse at 24% 74%,
+      color-mix(in srgb, var(--tone-d) 42%, transparent) 0%,
+      transparent 48%
+    ),
+    radial-gradient(
+      ellipse at 58% 58%,
+      color-mix(in srgb, var(--tone-e) 36%, transparent) 0%,
+      transparent 52%
+    );
+  opacity: var(--surge-opacity);
+  filter: blur(38px) saturate(1.45);
+  transform: translate3d(var(--ambient-inverse-x), var(--ambient-counter-y), 0)
+    scale(var(--surge-scale));
+  will-change: transform, opacity;
 }
 
 .color-field__blob {
@@ -534,7 +578,67 @@ img {
 .section-band {
   position: relative;
   isolation: isolate;
+  overflow: clip;
   padding: 96px max(24px, calc((100vw - 1180px) / 2));
+  background: transparent;
+}
+
+.section-band + .section-band {
+  margin-top: -72px;
+  padding-top: 168px;
+}
+
+.section-band::before {
+  content: "";
+  position: absolute;
+  inset: -120px 0;
+  z-index: 0;
+  pointer-events: none;
+  background: var(--section-glaze, transparent);
+  opacity: var(--section-glaze-opacity, 1);
+  filter: blur(0.5px) saturate(1.12);
+  mask-image: linear-gradient(
+    180deg,
+    transparent 0%,
+    black 18%,
+    black 82%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    180deg,
+    transparent 0%,
+    black 18%,
+    black 82%,
+    transparent 100%
+  );
+  transform-origin: center;
+  animation: section-current 13s cubic-bezier(0.22, 1, 0.36, 1) infinite
+    alternate;
+}
+
+.section-band > * {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes section-current {
+  0% {
+    transform: translate3d(
+        calc(var(--section-flow-x) - 2vw),
+        calc(var(--section-flow-y) + 1vh),
+        0
+      )
+      scale(1.06);
+  }
+
+  100% {
+    transform: translate3d(
+        calc(var(--section-flow-x) + 3vw),
+        calc(var(--section-flow-y) - 2vh),
+        0
+      )
+      scale(1.12);
+  }
 }
 
 .section-shell {
@@ -744,7 +848,7 @@ img {
 }
 
 .intro-band {
-  background:
+  --section-glaze:
     radial-gradient(
       ellipse at 22% 78%,
       color-mix(in srgb, var(--tone-d) 24%, transparent),
@@ -863,7 +967,7 @@ img {
 }
 
 .current-band {
-  background:
+  --section-glaze:
     radial-gradient(
       ellipse at 74% 74%,
       color-mix(in srgb, var(--tone-e) 26%, transparent),
@@ -968,7 +1072,7 @@ img {
 }
 
 .experience-band {
-  background:
+  --section-glaze:
     radial-gradient(
       circle at 18% 20%,
       color-mix(in srgb, var(--tone-d) 34%, transparent),
@@ -1068,7 +1172,7 @@ img {
   grid-template-columns: minmax(280px, 0.82fr) minmax(0, 1fr);
   gap: 42px;
   align-items: center;
-  background:
+  --section-glaze:
     linear-gradient(
       180deg,
       rgba(242, 232, 243, 0.12),
@@ -1100,7 +1204,7 @@ img {
 }
 
 .leadership-band {
-  background:
+  --section-glaze:
     radial-gradient(
       ellipse at 16% 78%,
       color-mix(in srgb, var(--tone-d) 20%, transparent),
@@ -1123,7 +1227,7 @@ img {
 }
 
 .credentials-band {
-  background:
+  --section-glaze:
     radial-gradient(
       circle at 12% 72%,
       color-mix(in srgb, var(--tone-f) 24%, transparent),
@@ -1158,7 +1262,7 @@ img {
 }
 
 .interests-band {
-  background:
+  --section-glaze:
     linear-gradient(
       180deg,
       rgba(248, 236, 240, 0.1),
@@ -1190,7 +1294,7 @@ img {
 }
 
 .contact-band {
-  background: linear-gradient(
+  --section-glaze: linear-gradient(
     180deg,
     rgba(255, 248, 242, 0.24),
     rgba(255, 248, 242, 0.4)
@@ -1252,6 +1356,15 @@ img {
   .section-band {
     padding-top: 78px;
     padding-bottom: 78px;
+  }
+
+  .section-band + .section-band {
+    margin-top: -56px;
+    padding-top: 134px;
+  }
+
+  .section-band::before {
+    inset: -90px 0;
   }
 
   .hero {
